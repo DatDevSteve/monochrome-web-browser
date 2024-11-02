@@ -35,6 +35,12 @@ class Ui_MainWindow(object):
 "}\n"
 "QLineEdit::placeholder {\n"
 "  color: #767e89;\n"
+"}"
+"QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"}"
+"QLabel {\n"
+"    color: rgb(255, 255, 255);\n"
 "}")
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -89,18 +95,44 @@ class Ui_MainWindow(object):
         self.addressBar.setObjectName("addressBar")
         self.horizontalLayout.addWidget(self.addressBar)
 
-#SEARCH BUTTON CODE
-        self.searchBtn = QtWidgets.QPushButton(self.topBar)
-        self.searchBtn.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("icons/searchIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.searchBtn.setIcon(icon3)
-        self.searchBtn.setIconSize(QtCore.QSize(22, 22))
-        self.searchBtn.setFlat(True)
-        self.searchBtn.setObjectName("searchBtn")
-        self.horizontalLayout.addWidget(self.searchBtn)
-        spacerItem1 = QtWidgets.QSpacerItem(50, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+#HORIZONTAL SPACER AFTER ADDRESSBAR
+        spacerItem1 = QtWidgets.QSpacerItem(25, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         self.horizontalLayout.addItem(spacerItem1)
+#ZOOM LEVEL CODE
+        self.lessZoomBtn = QtWidgets.QPushButton(self.topBar)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lessZoomBtn.sizePolicy().hasHeightForWidth())
+        self.lessZoomBtn.setSizePolicy(sizePolicy)
+        self.lessZoomBtn.setMaximumSize(QtCore.QSize(30, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(True)
+        self.lessZoomBtn.setFont(font)
+        self.lessZoomBtn.setText("-")
+        self.lessZoomBtn.setFlat(True)
+        self.lessZoomBtn.setObjectName("lessZoomBtn")
+        self.horizontalLayout.addWidget(self.lessZoomBtn)
+
+        self.zoomLevel = QtWidgets.QLabel(self.topBar)
+        self.zoomLevel.setObjectName("zoomLevel")
+        self.zoomLevel.setText("100%")
+        self.horizontalLayout.addWidget(self.zoomLevel)
+
+        self.moreZoomBtn = QtWidgets.QPushButton(self.topBar)
+        self.moreZoomBtn.setMaximumSize(QtCore.QSize(30, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(True)
+        self.moreZoomBtn.setText("+")
+        self.moreZoomBtn.setFont(font)
+        self.moreZoomBtn.setFlat(True)
+        self.moreZoomBtn.setObjectName("moreZoomBtn")
+        self.horizontalLayout.addWidget(self.moreZoomBtn)
+#HORIZONTAL SPACER AFTER ZOOM LEVEL
+        spacerItem2 = QtWidgets.QSpacerItem(25, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        self.horizontalLayout.addItem(spacerItem2)
 
 #SETTINGS BUTTON CODE
         self.settingsBtn = QtWidgets.QPushButton(self.topBar)
@@ -141,7 +173,7 @@ class Ui_MainWindow(object):
                 self.widget.load(QUrl(link1))
                 updateSearchBar(link1)
         self.addressBar.returnPressed.connect(searchEvent)
-        self.searchBtn.clicked.connect(searchEvent)
+        
         
         def updateSearchBar(link:str):
             self.addressBar.setText(link)
@@ -176,7 +208,37 @@ class Ui_MainWindow(object):
             newURL = self.widget.url().toString()
             updateSearchBar(newURL)
         self.widget.urlChanged.connect(updateURL)
-            
+        #Zoom functionality: (complicated af)    
+        def updateZoomLevel():
+            zoom = self.widget.zoomFactor()
+            zoomPercent = int(zoom * 100)
+            self.zoomLevel.setText(f"{zoomPercent}%")
+        def zoomIn():
+            currentZoom = self.widget.zoomFactor()
+            newZoom = float(currentZoom * 1.1)
+            self.widget.setZoomFactor(newZoom)
+            updateZoomLevel()
+        self.moreZoomBtn.clicked.connect(zoomIn)
+        def zoomOut():
+            currentZoom = self.widget.zoomFactor()
+            newZoom = float(currentZoom * 0.9)
+            self.widget.setZoomFactor(newZoom)
+            updateZoomLevel()
+        self.lessZoomBtn.clicked.connect(zoomOut)
+        #disabling ctrl+scroll to avoid conflicts in updating the label (zoomChanged method dead asf):
+        def handleWheelEvent(event):
+            if event.modifiers() & QtCore.Qt.ControlModifier:
+                print("ctrl key pressed, disabling scrolling")
+            # Ctrl is pressed, don't do default scrolling
+                event.accept()  # Accept the event but do nothing
+            else:
+                print("ctrl key not pressed")
+            # Ctrl is not pressed, let the default wheel event handler process it
+                super(QWebEngineView, self.widget).wheelEvent(event)
+        self.widget.wheelEvent = handleWheelEvent
+        
+
+        
 
 #WEB BROWSING FUNCTIONS END
 

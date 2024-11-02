@@ -161,14 +161,20 @@ class Ui_MainWindow(object):
 
         def forwardPage():
             self.widget.forward()
+            website = self.widget.url().toString()
+            updateSearchBar(website)
         self.forwardBtn.clicked.connect(forwardPage)
 
         def backPage():
             self.widget.back()
+            website = self.widget.url().toString()
+            updateSearchBar(website)
         self.backBtn.clicked.connect(backPage)
-        website = self.widget.url()
-        updateSearchBar(website)
         
+        def updateURL():
+            newURL = self.widget.url().toString()
+            updateSearchBar(newURL)
+        self.widget.urlChanged.connect(updateURL)
             
 
 #WEB BROWSING FUNCTIONS END

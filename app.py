@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QUrl
+import urllib.parse
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -136,9 +137,9 @@ class Ui_MainWindow(object):
                 self.widget.load(QUrl(link))
                 updateSearchBar(link)
             else:
-                link1 = {f"https://google.com/search?q={link}"}
-                self.widget.load(QUrl("https://www.google.com"))
-                updateSearchBar("https://www.google.com")
+                link1 = f"https://google.com/search?q={urllib.parse.quote(link)}"
+                self.widget.load(QUrl(link1))
+                updateSearchBar(link1)
         self.addressBar.returnPressed.connect(searchEvent)
         self.searchBtn.clicked.connect(searchEvent)
         

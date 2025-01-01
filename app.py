@@ -12,6 +12,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QUrl
 import urllib.parse
+with open('settings.txt', 'r', encoding='utf-8') as file:
+    appConfig = file.readlines()
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -236,11 +238,21 @@ class Ui_MainWindow(object):
             # Ctrl is not pressed, let the default wheel event handler process it
                 super(QWebEngineView, self.widget).wheelEvent(event)
         self.widget.wheelEvent = handleWheelEvent
-        
-
-        
-
 #WEB BROWSING FUNCTIONS END
+        def menuTrigger():
+            winStatus = appConfig[0]
+            if winStatus == "window_status = OPEN":
+                print("NOT OPENING SETTINGS WINDOW")
+            elif winStatus == "window_status = CLOSE":
+                print("OPENING WINDOW")
+                appConfig[0] = "window_status = OPEN"
+                file.writelines(appConfig)
+        self.settingsBtn.clicked.connect(menuTrigger)
+        
+#SETTINGS MENU FUNCTIONS
+        
+
+#SETTINGS MENU FUNCTIONS END
 
 
         self.retranslateUi(MainWindow)

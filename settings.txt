@@ -1,0 +1,2 @@
+window_status = CLOSE
+theme = DARK

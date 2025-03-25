@@ -239,18 +239,16 @@ class Ui_MainWindow(object):
                 super(QWebEngineView, self.widget).wheelEvent(event)
         self.widget.wheelEvent = handleWheelEvent
 #WEB BROWSING FUNCTIONS END
-        def menuTrigger():
-            winStatus = appConfig[0]
-            if winStatus == "window_status = OPEN":
-                print("NOT OPENING SETTINGS WINDOW")
-            elif winStatus == "window_status = CLOSE":
-                print("OPENING WINDOW")
-                appConfig[0] = "window_status = OPEN"
-                file.writelines(appConfig)
-        self.settingsBtn.clicked.connect(menuTrigger)
+
         
 #SETTINGS MENU FUNCTIONS
-        
+        def menuTrigger():
+            winStatus = appConfig[0]
+            with open("settings.py") as f:
+                exec(f.read())
+        self.settingsBtn.clicked.connect(menuTrigger)
+
+            
 
 #SETTINGS MENU FUNCTIONS END
 

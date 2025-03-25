@@ -66,7 +66,7 @@ QLineEdit::placeholder {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../3c26c788/backwardIcon.png</normaloff>../3c26c788/backwardIcon.png</iconset>
+           <normaloff>../e52994a7/backwardIcon.png</normaloff>../e52994a7/backwardIcon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -86,7 +86,7 @@ QLineEdit::placeholder {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../66abab68/reloadIcon.png</normaloff>../66abab68/reloadIcon.png</iconset>
+           <normaloff>../72484134/reloadIcon.png</normaloff>../72484134/reloadIcon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -106,7 +106,7 @@ QLineEdit::placeholder {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../aaf32348/forwardIcon.png</normaloff>../aaf32348/forwardIcon.png</iconset>
+           <normaloff>../ff993b4e/forwardIcon.png</normaloff>../ff993b4e/forwardIcon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -184,6 +184,51 @@ QLineEdit::placeholder {
            <height>16777215</height>
           </size>
          </property>
+         <property name="palette">
+          <palette>
+           <active>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled/>
+          </palette>
+         </property>
          <property name="font">
           <font>
            <pointsize>15</pointsize>
@@ -200,6 +245,33 @@ QLineEdit::placeholder {
        </item>
        <item>
         <widget class="QLabel" name="zoomLevel">
+         <property name="palette">
+          <palette>
+           <active>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled/>
+          </palette>
+         </property>
          <property name="text">
           <string>100%</string>
          </property>
@@ -252,7 +324,7 @@ QLineEdit::placeholder {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../1718bba1/settingIcon.png</normaloff>../1718bba1/settingIcon.png</iconset>
+           <normaloff>../f70aa668/settingIcon.png</normaloff>../f70aa668/settingIcon.png</iconset>
          </property>
          <property name="iconSize">
           <size>

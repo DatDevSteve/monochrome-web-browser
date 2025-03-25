@@ -94,9 +94,9 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="themeSelect">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="themeLabel">
            <property name="styleSheet">
             <string notr="true">
 QLineEdit {
@@ -126,16 +126,19 @@ background-color:rgb(5,19,26)
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_2">
+          <widget class="QRadioButton" name="light">
            <property name="text">
             <string>Light</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="dark">
            <property name="text">
             <string>Dark</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -151,7 +154,7 @@ background-color:rgb(5,19,26)
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="changesCtrl">
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
      </property>
@@ -168,7 +171,7 @@ background-color:rgb(5,19,26)
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>changesCtrl</sender>
    <signal>accepted()</signal>
    <receiver>Dialog</receiver>
    <slot>accept()</slot>
@@ -184,7 +187,7 @@ background-color:rgb(5,19,26)
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>changesCtrl</sender>
    <signal>rejected()</signal>
    <receiver>Dialog</receiver>
    <slot>reject()</slot>

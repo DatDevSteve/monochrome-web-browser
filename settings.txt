@@ -1,2 +1,2 @@
-window_status = CLOSE
+window_status = PENDING
 theme = DARK
